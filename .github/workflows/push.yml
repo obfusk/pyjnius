@@ -39,6 +39,7 @@ jobs:
       uses: actions/setup-python@v1
       with:
         python-version: ${{ matrix.python }}
+        architecture: ${{ matrix.architecture }}
 
     - name: Setup java
       uses: actions/setup-java@v1
