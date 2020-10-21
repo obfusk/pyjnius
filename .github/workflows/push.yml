@@ -5,7 +5,7 @@ jobs:
     name: base
     runs-on: ubuntu-latest
     container:
-      image: i386/python:3.9
+      image: i386/python:3.9-buster
       volumes:
         - /opt/hostedtoolcache
     steps:
