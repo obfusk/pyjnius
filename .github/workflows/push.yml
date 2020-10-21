@@ -7,7 +7,7 @@ jobs:
     container:
       image: i386/python:3.9-buster
       volumes:
-        /home/runner:/home/runner
+        - /home/runner:/home/runner
     steps:
     - name: info
       run: |
