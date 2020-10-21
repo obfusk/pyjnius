@@ -4,11 +4,12 @@ jobs:
   Tests:
     name: base
     runs-on: ubuntu-latest
-    container:
-      image: i386/python:3.9-buster
+    # container:
+    #   image: i386/python:3.9-buster
     steps:
     - name: info
       run: |
+        pwd
         env
         ls /bin /usr/bin
    #- uses: actions/checkout@master
