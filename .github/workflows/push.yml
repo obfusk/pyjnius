@@ -7,21 +7,25 @@ jobs:
     container:
       image: i386/python:3.9-buster
     steps:
-    - uses: actions/checkout@master
-    - uses: actions/setup-java@v1
-      with:
-        java-version: 12
-        architecture: x86
-    - name: install
+    - name: info
       run: |
-        linux32 --32bit i386 sh -c '
-          pip install --timeout=120 -U setuptools cython
-          pip install --timeout=120 .[dev,ci]
-        '
-    - name: test
-      run: |
-        linux32 --32bit i386 sh -c '
-          ant all
-          cd tests
-          CLASSPATH=../build/test-classes:../build/classes pytest -v
-        '
+        env
+        ls /bin /usr/bin
+   #- uses: actions/checkout@master
+   #- uses: actions/setup-java@v1
+   #  with:
+   #    java-version: 12
+   #    architecture: x86
+   #- name: install
+   #  run: |
+   #    linux32 --32bit i386 sh -c '
+   #      pip install --timeout=120 -U setuptools cython
+   #      pip install --timeout=120 .[dev,ci]
+   #    '
+   #- name: test
+   #  run: |
+   #    linux32 --32bit i386 sh -c '
+   #      ant all
+   #      cd tests
+   #      CLASSPATH=../build/test-classes:../build/classes pytest -v
+   #    '
