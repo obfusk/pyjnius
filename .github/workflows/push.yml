@@ -12,37 +12,47 @@ jobs:
     steps:
     - name: info
       run: |
-        cat /etc/*release || true
-        uname -a
-        arch
-        git version
-        python --version
+        linux32 --32bit i386 sh -c '
+          cat /etc/*release || true
+          uname -a
+          arch
+          git version
+          python --version
+        '
 
     - name: checkout
       run: |
-        git init .
-        git remote add origin https://github.com/$GITHUB_REPOSITORY
-        git config --local gc.auto 0
-        git fetch --no-tags --prune --progress --no-recurse-submodules \
-          --depth=1 origin +$GITHUB_SHA:refs/remotes/origin/${GITHUB_REF##*/}
-        git checkout --progress --force -B ${GITHUB_REF##*/} \
-          refs/remotes/origin/${GITHUB_REF##*/}
-        git log -1 --format='%H'
+        linux32 --32bit i386 sh -c '
+          git init .
+          git remote add origin https://github.com/$GITHUB_REPOSITORY
+          git config --local gc.auto 0
+          git fetch --no-tags --prune --progress --no-recurse-submodules \
+            --depth=1 origin +$GITHUB_SHA:refs/remotes/origin/${GITHUB_REF##*/}
+          git checkout --progress --force -B ${GITHUB_REF##*/} \
+            refs/remotes/origin/${GITHUB_REF##*/}
+          git log -1 --format=%H
+        '
 
     - name: setup java
       run: |
-        apt update
-        apt install -y openjdk-11-jdk-headless ant
+        linux32 --32bit i386 sh -c '
+          apt update
+          apt install -y openjdk-11-jdk-headless ant
+        '
       env:
         DEBIAN_FRONTEND: noninteractive
 
     - name: install
       run: |
-        pip install --timeout=120 -U setuptools cython
-        pip install --timeout=120 .[dev,ci]
+        linux32 --32bit i386 sh -c '
+          pip install --timeout=120 -U setuptools cython
+          pip install --timeout=120 .[dev,ci]
+        '
 
     - name: test
       run: |
-        ant all
-        cd tests
-        CLASSPATH=../build/test-classes:../build/classes pytest -v
+        linux32 --32bit i386 sh -c '
+          ant all
+          cd tests
+          CLASSPATH=../build/test-classes:../build/classes pytest -v
+        '
