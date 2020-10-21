@@ -4,14 +4,14 @@ jobs:
   Tests:
     name: base
     runs-on: ubuntu-latest
-    # container:
-    #   image: i386/python:3.9-buster
+    container:
+      image: i386/ubuntu:latest
     steps:
     - uses: actions/checkout@master
     - name: info
       run: |
         pwd
-        ls -hlA 
+        ls -hlA
         env
         ls /bin /usr/bin
    #- uses: actions/setup-java@v1
