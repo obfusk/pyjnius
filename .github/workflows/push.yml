@@ -15,7 +15,6 @@ jobs:
         linux32 sh -ec '
           cat /etc/*release || true
           uname -a
-          arch
           git version
           python --version
         '
@@ -38,6 +37,7 @@ jobs:
         linux32 sh -ec '
           apt update
           apt install -y openjdk-11-jdk-headless ant
+          java -version
         '
       env:
         DEBIAN_FRONTEND: noninteractive
