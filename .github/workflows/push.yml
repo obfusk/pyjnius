@@ -12,14 +12,14 @@ jobs:
     steps:
     - name: info
       run: |
-        linux32 --32bit sh -ec 'echo OK'
-        linux32 --32bit sh -ec '
-          cat /etc/*release || true
-          uname -a
-          arch
-          git version
-          python --version
-        '
+        linux32 arch
+    #   linux32 --32bit sh -ec '
+    #     cat /etc/*release || true
+    #     uname -a
+    #     arch
+    #     git version
+    #     python --version
+    #   '
 
     - name: checkout
       run: |
