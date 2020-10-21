@@ -4,12 +4,22 @@ jobs:
   Tests:
     name: base
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python: [3.6, 3.7, 3.8, 3.9]
     container:
-      image: i386/python:3.9-buster
+      image: i386/python:${{ matrix.python }}-buster
     steps:
+    - name: info
+      run: |
+        cat /etc/*release || true
+        uname -a
+        arch
+        git version
+        python --version
+
     - name: checkout
       run: |
-        git version
         git init .
         git remote add origin https://github.com/$GITHUB_REPOSITORY
         git config --local gc.auto 0
