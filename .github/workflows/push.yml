@@ -6,8 +6,6 @@ jobs:
     runs-on: ubuntu-latest
     container:
       image: i386/python:3.9-buster
-      volumes:
-        - /opt/hostedtoolcache
     steps:
     - uses: actions/checkout@master
     - uses: actions/setup-java@v1
