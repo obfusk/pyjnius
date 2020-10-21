@@ -6,8 +6,6 @@ jobs:
     runs-on: ubuntu-latest
     container:
       image: i386/python:3.9-buster
-      volumes:
-        - /home/runner:/home/runner
     steps:
     - name: info
       run: |
@@ -16,6 +14,24 @@ jobs:
         ls -hlA
         env
         ls /bin /usr/bin
+
+    - name: checkout
+      run: |
+        git version
+        git init .
+        git remote add origin https://github.com/$GITHUB_REPOSITORY
+        git config --local gc.auto 0
+        git fetch --no-tags --prune --progress --no-recurse-submodules \
+          --depth=1 origin +$GITHUB_SHA:refs/remotes/origin/${GITHUB_REF##*/}
+        git checkout --progress --force -B ${GITHUB_REF##*/} \
+          refs/remotes/origin/${GITHUB_REF##*/}
+        git log -1 --format='%H'
+
+    - name: setup java
+      run: |
+        apt update
+        apt install openjdk-11-jdk-headless
+
 #   - uses: actions/setup-java@v1
 #     with:
 #       java-version: 12
