@@ -5,29 +5,31 @@ jobs:
     name: base
     runs-on: ubuntu-latest
     container:
-      image: i386/ubuntu:latest
+      image: i386/python:3.9-buster
+      volumes:
+        /home/runner:/home/runner
     steps:
-    - uses: actions/checkout@master
     - name: info
       run: |
         pwd
         ls -hlA
         env
         ls /bin /usr/bin
-   #- uses: actions/setup-java@v1
-   #  with:
-   #    java-version: 12
-   #    architecture: x86
-   #- name: install
-   #  run: |
-   #    linux32 --32bit i386 sh -c '
-   #      pip install --timeout=120 -U setuptools cython
-   #      pip install --timeout=120 .[dev,ci]
-   #    '
-   #- name: test
-   #  run: |
-   #    linux32 --32bit i386 sh -c '
-   #      ant all
-   #      cd tests
-   #      CLASSPATH=../build/test-classes:../build/classes pytest -v
-   #    '
+    - uses: actions/checkout@master
+#   - uses: actions/setup-java@v1
+#     with:
+#       java-version: 12
+#       architecture: x86
+#   - name: install
+#     run: |
+#       linux32 --32bit i386 sh -c '
+#         pip install --timeout=120 -U setuptools cython
+#         pip install --timeout=120 .[dev,ci]
+#       '
+#   - name: test
+#     run: |
+#       linux32 --32bit i386 sh -c '
+#         ant all
+#         cd tests
+#         CLASSPATH=../build/test-classes:../build/classes pytest -v
+#       '
